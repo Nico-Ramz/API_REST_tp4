@@ -1,9 +1,6 @@
 package com.example.inicial1.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -13,10 +10,12 @@ import lombok.*;
 @Getter
 @ToString
 @Builder
-public class Domicilio {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Domicilio extends Base{
+
     private String calle;
     private int numero;
+
+    @ManyToOne(optional = false) //es para que esta opcion no pueda ser null
+    @JoinColumn(name = "fk_localidad")
+    private Localidad localidad;
 }
